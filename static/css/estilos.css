@@ -1,8 +1,11 @@
+/* El selector universal * aplica esta regla a todos los elementos HTML. */
 * {
+    /* Incluye padding y borde dentro de las dimensiones declaradas de cada elemento. */
     box-sizing: border-box;
 }
 
 
+/* Un selector por etiqueta aplica estilos a todos los elementos body. */
 body {
     margin: 0;
 
@@ -21,6 +24,7 @@ body {
 /* HEADER */
 /* ============================= */
 
+/* Los selectores pueden combinar etiqueta y clase para limitar el alcance del estilo. */
 header {
     background: #163B4D;
 
@@ -79,6 +83,7 @@ main {
 /* ============================= */
 
 .resumen {
+    /* display:grid activa CSS Grid; repeat reparte tres columnas del mismo ancho. */
     display: grid;
 
     grid-template-columns:
@@ -91,6 +96,7 @@ main {
 
 
 .card {
+    /* El fondo, espaciado, redondeo y sombra forman la presentación de cada tarjeta. */
     background: white;
 
     padding: 25px;
@@ -232,6 +238,7 @@ main {
 /* ============================= */
 
 .tabla-container {
+    /* Permite consultar la tabla en pantallas angostas sin comprimir sus columnas. */
     width: 100%;
 
     overflow-x: auto;
@@ -239,6 +246,7 @@ main {
 
 
 .horario-tabla {
+    /* border-collapse une los bordes de celdas y table-layout fija su distribución. */
     width: 100%;
 
     min-width: 900px;
@@ -263,6 +271,7 @@ main {
 
 
 .horario-tabla th:first-child {
+    /* :first-child es una pseudoclase que selecciona la primera celda de encabezado. */
     width: 80px;
 }
 
@@ -280,6 +289,7 @@ main {
 
 
 .hora {
+    /* !important eleva la prioridad de esta regla frente a otras reglas competidoras. */
     background: #f8fafc;
 
     text-align: center;
@@ -326,6 +336,7 @@ main {
 
 
 .clase:hover {
+    /* :hover aplica el efecto mientras el puntero está sobre una tarjeta. */
     transform: translateY(-2px);
 
     box-shadow:
@@ -489,6 +500,8 @@ footer p {
 /* ============================= */
 
 @media (max-width: 900px) {
+    /* Reduce columnas y tipografía para adaptar el contenido a tabletas. */
+    /* @media limita estas reglas a pantallas de hasta 900 píxeles de ancho. */
 
     .resumen {
         grid-template-columns:
@@ -510,6 +523,8 @@ footer p {
 
 
 @media (max-width: 600px) {
+    /* Aprovecha el ancho del teléfono y apila los elementos de cada grupo. */
+    /* Las reglas internas sustituyen algunos valores definidos para pantallas mayores. */
 
     main {
         width: 95%;
@@ -538,6 +553,7 @@ footer p {
 /* ============================= */
 
 .controles {
+    /* Flexbox alinea los controles en una fila y distribuye espacio entre ellos. */
     display: flex;
 
     justify-content: space-between;
@@ -593,6 +609,7 @@ footer p {
 
 
 #generarHorario {
+    /* # selecciona por id; :disabled permite dar estilo al estado inactivo del botón. */
     border: none;
 
     background: #163B4D;
@@ -663,6 +680,8 @@ footer p {
 /* ============================= */
 
 @media (max-width: 700px) {
+    /* En móvil, apila el selector y el botón para facilitar su uso táctil. */
+    /* Este punto de quiebre redefine el eje de Flexbox para pantallas pequeñas. */
 
     .controles {
         flex-direction: column;
