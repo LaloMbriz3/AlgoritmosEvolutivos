@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Generador de Horarios</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/estilos.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+    <header>
+
+        <div class="header-contenido">
+
+            <h1>Generador de Horarios</h1>
+
+            <p>
+                Algoritmo evolutivo para la generación automática
+                de horarios escolares
+            </p>
+
+        </div>
+
+    </header>
+
+
+    <main>
+
+
+        <!-- CONTROLES -->
+
+        <section class="controles">
+
+            <div class="selector">
+
+                <label for="selectorGrupo">
+                    Ver grupo:
+                </label>
+
+                <select id="selectorGrupo">
+
+                    <option value="todos">
+                        Todos los grupos
+                    </option>
+
+                    {% for grupo in grupos %}
+
+                    <option value="{{ grupo.id }}">
+                        {{ grupo.nombre }}
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+
+            <button
+                type="button"
+                id="generarHorario"
+            >
+                Generar nuevo horario
+            </button>
+
+        </section>
+
+
+        <p
+            id="mensaje"
+            class="mensaje"
+            aria-live="polite"
+        >
+            Horario generado correctamente.
+        </p>
+
+
+        <!-- RESUMEN -->
+
+        <section class="resumen">
+
+            <div class="card">
+
+                <span
+                    class="card-numero"
+                    id="sesiones"
+                >
+                    {{ sesiones }}
+                </span>
+
+                <span class="card-texto">
+                    Sesiones generadas
+                </span>
+
+            </div>
+
+
+            <div class="card">
+
+                <span class="card-numero">
+                    {{ grupos|length }}
+                </span>
+
+                <span class="card-texto">
+                    Grupos
+                </span>
+
+            </div>
+
+
+            <div class="card">
+
+                <span
+                    class="card-numero"
+                    id="penalizacion"
+                >
+                    {{ penalizacion }}
+                </span>
+
+                <span class="card-texto">
+                    Penalización
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <!-- EXPLICACIÓN -->
+
+        <section class="introduccion">
+
+            <h2>Horario escolar</h2>
+
+            <p>
+                El sistema utiliza un algoritmo evolutivo para
+                encontrar una combinación de materias, profesores,
+                salones y horarios reduciendo los conflictos.
+            </p>
+
+        </section>
+
+
+        <!-- AQUÍ JAVASCRIPT GENERARÁ LOS HORARIOS -->
+
+        <section id="contenedorHorarios">
+        </section>
+
+
+        <!-- INFORMACIÓN -->
+
+        <section class="informacion">
+
+            <h2>¿Cómo funciona?</h2>
+
+            <div class="pasos">
+
+                <div class="paso">
+
+                    <span>1</span>
+
+                    <h3>Datos</h3>
+
+                    <p>
+                        Se cargan materias, profesores,
+                        grupos y salones.
+                    </p>
+
+                </div>
+
+
+                <div class="paso">
+
+                    <span>2</span>
+
+                    <h3>Algoritmo</h3>
+
+                    <p>
+                        Se generan y evalúan diferentes
+                        combinaciones de horarios.
+                    </p>
+
+                </div>
+
+
+                <div class="paso">
+
+                    <span>3</span>
+
+                    <h3>Evaluación</h3>
+
+                    <p>
+                        Se penalizan conflictos y
+                        horarios poco convenientes.
+                    </p>
+
+                </div>
+
+
+                <div class="paso">
+
+                    <span>4</span>
+
+                    <h3>Resultado</h3>
+
+                    <p>
+                        Se muestra la mejor solución
+                        encontrada por el algoritmo.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <footer>
+
+        <p>
+            Proyecto de Inteligencia Artificial ·
+            Algoritmos Evolutivos
+        </p>
+
+    </footer>
+
+
+    <script
+        src="{{ url_for('static', filename='js/app.js') }}"
+    ></script>
+
+</body>
+
+</html>

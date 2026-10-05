@@ -1,0 +1,88 @@
+[
+  {
+    "id": "A01",
+    "materia_id": "M01",
+    "grupo_id": "G01",
+    "profesor_id": "P01"
+  },
+  {
+    "id": "A02",
+    "materia_id": "M02",
+    "grupo_id": "G01",
+    "profesor_id": "P02"
+  },
+  {
+    "id": "A03",
+    "materia_id": "M03",
+    "grupo_id": "G01",
+    "profesor_id": "P03"
+  },
+  {
+    "id": "A04",
+    "materia_id": "M04",
+    "grupo_id": "G01",
+    "profesor_id": "P04"
+  },
+  {
+    "id": "A05",
+    "materia_id": "M05",
+    "grupo_id": "G01",
+    "profesor_id": "P05"
+  },
+  {
+    "id": "A06",
+    "materia_id": "M06",
+    "grupo_id": "G01",
+    "profesor_id": "P06"
+  },
+
+  {
+    "id": "A07",
+    "materia_id": "M01",
+    "grupo_id": "G02",
+    "profesor_id": "P01"
+  },
+  {
+    "id": "A08",
+    "materia_id": "M02",
+    "grupo_id": "G02",
+    "profesor_id": "P02"
+  },
+  {
+    "id": "A09",
+    "materia_id": "M04",
+    "grupo_id": "G02",
+    "profesor_id": "P04"
+  },
+  {
+    "id": "A10",
+    "materia_id": "M06",
+    "grupo_id": "G02",
+    "profesor_id": "P06"
+  },
+
+  {
+    "id": "A11",
+    "materia_id": "M01",
+    "grupo_id": "G03",
+    "profesor_id": "P03"
+  },
+  {
+    "id": "A12",
+    "materia_id": "M02",
+    "grupo_id": "G03",
+    "profesor_id": "P02"
+  },
+  {
+    "id": "A13",
+    "materia_id": "M04",
+    "grupo_id": "G03",
+    "profesor_id": "P04"
+  },
+  {
+    "id": "A14",
+    "materia_id": "M06",
+    "grupo_id": "G03",
+    "profesor_id": "P06"
+  }
+]

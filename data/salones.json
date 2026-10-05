@@ -1,0 +1,26 @@
+[
+  {
+    "id": "S01",
+    "nombre": "Aula 101",
+    "capacidad": 40,
+    "tipo": "aula"
+  },
+  {
+    "id": "S02",
+    "nombre": "Aula 102",
+    "capacidad": 30,
+    "tipo": "aula"
+  },
+  {
+    "id": "S03",
+    "nombre": "Laboratorio 1",
+    "capacidad": 32,
+    "tipo": "laboratorio"
+  },
+  {
+    "id": "S04",
+    "nombre": "Laboratorio 2",
+    "capacidad": 25,
+    "tipo": "laboratorio"
+  }
+]

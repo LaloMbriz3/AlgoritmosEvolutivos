@@ -1,0 +1,246 @@
+[
+  {
+    "id": "B01",
+    "dia": "Lunes",
+    "hora_inicio": "07:00",
+    "hora_fin": "08:00"
+  },
+  {
+    "id": "B02",
+    "dia": "Lunes",
+    "hora_inicio": "08:00",
+    "hora_fin": "09:00"
+  },
+  {
+    "id": "B03",
+    "dia": "Lunes",
+    "hora_inicio": "09:00",
+    "hora_fin": "10:00"
+  },
+  {
+    "id": "B04",
+    "dia": "Lunes",
+    "hora_inicio": "10:00",
+    "hora_fin": "11:00"
+  },
+  {
+    "id": "B05",
+    "dia": "Lunes",
+    "hora_inicio": "11:00",
+    "hora_fin": "12:00"
+  },
+  {
+    "id": "B06",
+    "dia": "Lunes",
+    "hora_inicio": "12:00",
+    "hora_fin": "13:00"
+  },
+  {
+    "id": "B07",
+    "dia": "Lunes",
+    "hora_inicio": "13:00",
+    "hora_fin": "14:00"
+  },
+  {
+    "id": "B08",
+    "dia": "Lunes",
+    "hora_inicio": "14:00",
+    "hora_fin": "15:00"
+  },
+
+  {
+    "id": "B09",
+    "dia": "Martes",
+    "hora_inicio": "07:00",
+    "hora_fin": "08:00"
+  },
+  {
+    "id": "B10",
+    "dia": "Martes",
+    "hora_inicio": "08:00",
+    "hora_fin": "09:00"
+  },
+  {
+    "id": "B11",
+    "dia": "Martes",
+    "hora_inicio": "09:00",
+    "hora_fin": "10:00"
+  },
+  {
+    "id": "B12",
+    "dia": "Martes",
+    "hora_inicio": "10:00",
+    "hora_fin": "11:00"
+  },
+  {
+    "id": "B13",
+    "dia": "Martes",
+    "hora_inicio": "11:00",
+    "hora_fin": "12:00"
+  },
+  {
+    "id": "B14",
+    "dia": "Martes",
+    "hora_inicio": "12:00",
+    "hora_fin": "13:00"
+  },
+  {
+    "id": "B15",
+    "dia": "Martes",
+    "hora_inicio": "13:00",
+    "hora_fin": "14:00"
+  },
+  {
+    "id": "B16",
+    "dia": "Martes",
+    "hora_inicio": "14:00",
+    "hora_fin": "15:00"
+  },
+
+  {
+    "id": "B17",
+    "dia": "Miércoles",
+    "hora_inicio": "07:00",
+    "hora_fin": "08:00"
+  },
+  {
+    "id": "B18",
+    "dia": "Miércoles",
+    "hora_inicio": "08:00",
+    "hora_fin": "09:00"
+  },
+  {
+    "id": "B19",
+    "dia": "Miércoles",
+    "hora_inicio": "09:00",
+    "hora_fin": "10:00"
+  },
+  {
+    "id": "B20",
+    "dia": "Miércoles",
+    "hora_inicio": "10:00",
+    "hora_fin": "11:00"
+  },
+  {
+    "id": "B21",
+    "dia": "Miércoles",
+    "hora_inicio": "11:00",
+    "hora_fin": "12:00"
+  },
+  {
+    "id": "B22",
+    "dia": "Miércoles",
+    "hora_inicio": "12:00",
+    "hora_fin": "13:00"
+  },
+  {
+    "id": "B23",
+    "dia": "Miércoles",
+    "hora_inicio": "13:00",
+    "hora_fin": "14:00"
+  },
+  {
+    "id": "B24",
+    "dia": "Miércoles",
+    "hora_inicio": "14:00",
+    "hora_fin": "15:00"
+  },
+
+  {
+    "id": "B25",
+    "dia": "Jueves",
+    "hora_inicio": "07:00",
+    "hora_fin": "08:00"
+  },
+  {
+    "id": "B26",
+    "dia": "Jueves",
+    "hora_inicio": "08:00",
+    "hora_fin": "09:00"
+  },
+  {
+    "id": "B27",
+    "dia": "Jueves",
+    "hora_inicio": "09:00",
+    "hora_fin": "10:00"
+  },
+  {
+    "id": "B28",
+    "dia": "Jueves",
+    "hora_inicio": "10:00",
+    "hora_fin": "11:00"
+  },
+  {
+    "id": "B29",
+    "dia": "Jueves",
+    "hora_inicio": "11:00",
+    "hora_fin": "12:00"
+  },
+  {
+    "id": "B30",
+    "dia": "Jueves",
+    "hora_inicio": "12:00",
+    "hora_fin": "13:00"
+  },
+  {
+    "id": "B31",
+    "dia": "Jueves",
+    "hora_inicio": "13:00",
+    "hora_fin": "14:00"
+  },
+  {
+    "id": "B32",
+    "dia": "Jueves",
+    "hora_inicio": "14:00",
+    "hora_fin": "15:00"
+  },
+
+  {
+    "id": "B33",
+    "dia": "Viernes",
+    "hora_inicio": "07:00",
+    "hora_fin": "08:00"
+  },
+  {
+    "id": "B34",
+    "dia": "Viernes",
+    "hora_inicio": "08:00",
+    "hora_fin": "09:00"
+  },
+  {
+    "id": "B35",
+    "dia": "Viernes",
+    "hora_inicio": "09:00",
+    "hora_fin": "10:00"
+  },
+  {
+    "id": "B36",
+    "dia": "Viernes",
+    "hora_inicio": "10:00",
+    "hora_fin": "11:00"
+  },
+  {
+    "id": "B37",
+    "dia": "Viernes",
+    "hora_inicio": "11:00",
+    "hora_fin": "12:00"
+  },
+  {
+    "id": "B38",
+    "dia": "Viernes",
+    "hora_inicio": "12:00",
+    "hora_fin": "13:00"
+  },
+  {
+    "id": "B39",
+    "dia": "Viernes",
+    "hora_inicio": "13:00",
+    "hora_fin": "14:00"
+  },
+  {
+    "id": "B40",
+    "dia": "Viernes",
+    "hora_inicio": "14:00",
+    "hora_fin": "15:00"
+  }
+]
