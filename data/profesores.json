@@ -2,58 +2,31 @@
   {
     "id": "P01",
     "nombre": "Profesor Juan",
-    "disponibilidad": [
-      "Lunes",
-      "Martes",
-      "Miércoles"
-    ]
+    "disponibilidad": ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"]
   },
   {
     "id": "P02",
     "nombre": "Profesora Ana",
-    "disponibilidad": [
-      "Lunes",
-      "Miércoles",
-      "Jueves",
-      "Viernes"
-    ]
+    "disponibilidad": ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"]
   },
   {
     "id": "P03",
     "nombre": "Profesor Carlos",
-    "disponibilidad": [
-      "Martes",
-      "Miércoles",
-      "Viernes"
-    ]
+    "disponibilidad": ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"]
   },
   {
     "id": "P04",
     "nombre": "Profesora María",
-    "disponibilidad": [
-      "Lunes",
-      "Martes",
-      "Jueves"
-    ]
+    "disponibilidad": ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"]
   },
   {
     "id": "P05",
     "nombre": "Profesor Luis",
-    "disponibilidad": [
-      "Lunes",
-      "Miércoles",
-      "Jueves",
-      "Viernes"
-    ]
+    "disponibilidad": ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"]
   },
   {
     "id": "P06",
     "nombre": "Profesora Laura",
-    "disponibilidad": [
-      "Martes",
-      "Miércoles",
-      "Jueves",
-      "Viernes"
-    ]
+    "disponibilidad": ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"]
   }
 ]
