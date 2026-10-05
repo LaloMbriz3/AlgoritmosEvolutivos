@@ -2,42 +2,42 @@
   {
     "id": "M01",
     "nombre": "Bases de Datos en la Nube",
-    "horas_semana": 3,
+    "horas_semana": 6,
     "principal": true,
     "duracion_preferida": 2
   },
   {
     "id": "M02",
     "nombre": "Inglés",
-    "horas_semana": 3,
+    "horas_semana": 5,
     "principal": false,
     "duracion_preferida": 1
   },
   {
     "id": "M03",
     "nombre": "Ética Profesional",
-    "horas_semana": 2,
+    "horas_semana": 6,
     "principal": false,
-    "duracion_preferida": 1
+    "duracion_preferida": 2
   },
   {
     "id": "M04",
     "nombre": "Desarrollo Web",
-    "horas_semana": 3,
+    "horas_semana": 6,
     "principal": true,
     "duracion_preferida": 2
   },
   {
     "id": "M05",
     "nombre": "Ingeniería de Software",
-    "horas_semana": 2,
+    "horas_semana": 6,
     "principal": false,
-    "duracion_preferida": 1
+    "duracion_preferida": 2
   },
   {
     "id": "M06",
     "nombre": "Inteligencia Artificial",
-    "horas_semana": 3,
+    "horas_semana": 6,
     "principal": true,
     "duracion_preferida": 2
   }
