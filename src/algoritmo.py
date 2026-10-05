@@ -1,5 +1,7 @@
+# random genera elecciones probabilísticas para crear y modificar individuos.
 import random
 
+# base, creator y tools son módulos de DEAP para definir y operar el algoritmo genético.
 from deap import base, creator, tools
 
 from src.cargar_datos import cargar_datos
@@ -9,11 +11,13 @@ from src.evaluacion import evaluar_horario
 
 
 def preparar_opciones(sesiones, datos):
+    # Cada gen necesita al menos una alternativa válida para cada sesión.
     opciones_por_sesion = []
 
     for sesion in sesiones:
         opciones = obtener_opciones_sesion(sesion, datos)
 
+        # Una excepción detiene el proceso con el identificador que no pudo ubicarse.
         if not opciones:
             raise ValueError(
                 f"No existen opciones válidas para la sesión {sesion['id']}"
@@ -25,6 +29,8 @@ def preparar_opciones(sesiones, datos):
 
 
 def crear_individuo(opciones_por_sesion):
+    # El cromosoma guarda un índice: uno por sesión, apuntando a su alternativa.
+    # La comprensión de lista produce un gen por sesión y randrange elige un índice válido.
     return [
         random.randrange(len(opciones))
         for opciones in opciones_por_sesion
@@ -32,6 +38,8 @@ def crear_individuo(opciones_por_sesion):
 
 
 def convertir_solucion(individuo, opciones_por_sesion):
+    # Traduce los índices del cromosoma a bloques horarios y salones concretos.
+    # enumerate entrega a la vez la posición y el gen; esa posición identifica la sesión.
     return [
         opciones_por_sesion[i][indice]
         for i, indice in enumerate(individuo)
@@ -43,6 +51,7 @@ def ejecutar_algoritmo(
     tam_poblacion=50,
     generaciones=100
 ):
+    # Primero se convierte la carga semanal de cada asignación en sesiones atómicas.
     sesiones = crear_sesiones(
         datos["asignaciones"],
         datos["materias"]
@@ -53,10 +62,14 @@ def ejecutar_algoritmo(
         datos
     )
 
+    # DEAP registra estos tipos globalmente; comprobarlos evita redefinirlos
+    # cuando se generan varios horarios dentro del mismo proceso Flask.
+    # hasattr consulta si el tipo ya existe en el registro global de DEAP.
     if not hasattr(creator, "FitnessHorario"):
         creator.create(
             "FitnessHorario",
             base.Fitness,
+            # DEAP expresa la aptitud como tupla; un peso negativo indica minimización.
             weights=(-1.0,)
         )
 
@@ -69,10 +82,12 @@ def ejecutar_algoritmo(
 
     toolbox = base.Toolbox()
 
+    # register asocia un nombre operativo con la función que DEAP ejecutará después.
     toolbox.register(
         "individual",
         tools.initIterate,
         creator.IndividualHorario,
+        # lambda define aquí una función breve sin argumentos que captura las opciones.
         lambda: crear_individuo(opciones_por_sesion)
     )
 
@@ -84,6 +99,7 @@ def ejecutar_algoritmo(
     )
 
     def evaluar(individuo):
+        # DEAP espera una tupla de aptitud; el peso negativo indica que se minimiza.
         solucion = convertir_solucion(
             individuo,
             opciones_por_sesion
@@ -95,10 +111,12 @@ def ejecutar_algoritmo(
             datos
         )
 
+        # La coma convierte el valor en tupla de un elemento, formato requerido por DEAP.
         return (penalizacion,)
 
     toolbox.register("evaluate", evaluar)
 
+    # Configura las operaciones evolutivas aplicadas a los cromosomas.
     toolbox.register(
         "mate",
         tools.cxTwoPoint
@@ -108,10 +126,12 @@ def ejecutar_algoritmo(
         "mutate",
         tools.mutUniformInt,
         low=0,
+        # up recibe el máximo inclusivo permitido para cada gen, según sus opciones.
         up=[
             len(opciones) - 1
             for opciones in opciones_por_sesion
         ],
+        # indpb es la probabilidad de mutar individualmente cada gen.
         indpb=0.05
     )
 
@@ -121,31 +141,39 @@ def ejecutar_algoritmo(
         tournsize=3
     )
 
+    # Construye y evalúa la población inicial antes de iniciar las generaciones.
     poblacion = toolbox.population(
         n=tam_poblacion
     )
 
+    # Asigna a cada individuo su aptitud antes de compararlo durante la selección.
     for individuo in poblacion:
         individuo.fitness.values = toolbox.evaluate(
             individuo
         )
 
+    # range produce los índices de generación desde cero hasta generaciones - 1.
     for generacion in range(generaciones):
 
+        # Selección por torneo y copia para que las modificaciones no alteren
+        # los individuos originales de la población actual.
         descendientes = toolbox.select(
             poblacion,
             len(poblacion)
         )
 
+        # map aplica clone a cada seleccionado; list materializa el iterador resultante.
         descendientes = list(
             map(toolbox.clone, descendientes)
         )
 
+        # range(start, stop, step) recorre pares sin salir del límite de la lista.
         for i in range(
             0,
             len(descendientes) - 1,
             2
         ):
+            # random.random devuelve un valor entre 0 y 1 para decidir si se cruza el par.
             if random.random() < 0.7:
 
                 toolbox.mate(
@@ -153,17 +181,21 @@ def ejecutar_algoritmo(
                     descendientes[i + 1]
                 )
 
+                # del elimina la aptitud almacenada porque el cruce cambió los genes.
                 del descendientes[i].fitness.values
                 del descendientes[i + 1].fitness.values
 
         for individuo in descendientes:
 
+            # La comparación con 0.2 aplica la probabilidad de mutación configurada.
             if random.random() < 0.2:
 
                 toolbox.mutate(individuo)
 
                 del individuo.fitness.values
 
+        # Solo se recalcula la aptitud de individuos que cambiaron por cruza o mutación.
+        # Esta comprensión filtra los descendientes cuya aptitud quedó invalidada.
         individuos_invalidos = [
             individuo
             for individuo in descendientes
@@ -176,8 +208,11 @@ def ejecutar_algoritmo(
                 individuo
             )
 
+        # La asignación a [:] reemplaza el contenido sin cambiar el objeto lista original.
         poblacion[:] = descendientes
 
+    # Selecciona el mejor individuo de la última población y materializa su solución.
+    # selBest retorna una lista ordenada; [0] toma el individuo de mejor aptitud.
     mejor = tools.selBest(
         poblacion,
         1
@@ -194,6 +229,7 @@ def ejecutar_algoritmo(
         datos
     )
 
+    # Devuelve un diccionario con claves nombradas para que los llamadores lean el resultado.
     return {
         "sesiones": sesiones,
         "solucion": mejor_solucion,
@@ -203,6 +239,8 @@ def ejecutar_algoritmo(
 
 def imprimir_horario(resultado, datos):
 
+    # Prepara índices para resolver las referencias de la solución al imprimirla.
+    # Estas comprensiones de diccionario convierten catálogos en índices de consulta directa.
     bloques_por_id = {
         bloque["id"]: bloque
         for bloque in datos["bloques"]
@@ -238,6 +276,7 @@ def imprimir_horario(resultado, datos):
 
     clases = []
 
+    # Forma registros completos para ordenarlos y agruparlos por grupo.
     for sesion, opcion in zip(
         resultado["sesiones"],
         resultado["solucion"]
@@ -267,6 +306,7 @@ def imprimir_horario(resultado, datos):
             ]["nombre"]
         })
 
+    # Una tupla como clave ordena primero por grupo, luego por día y finalmente por hora.
     clases.sort(
         key=lambda clase: (
             clase["grupo_id"],
@@ -290,6 +330,7 @@ def imprimir_horario(resultado, datos):
 
             print()
             print("-" * 100)
+            # Los especificadores :10 y :30 reservan ancho para alinear columnas de texto.
             print(
                 f"GRUPO: {grupos_por_id[grupo_actual]['nombre']}"
             )
@@ -314,8 +355,10 @@ def imprimir_horario(resultado, datos):
     print("=" * 100)
 
 
+# El bloque solo se ejecuta al lanzar este archivo, no al importarlo desde Flask.
 if __name__ == "__main__":
 
+    # Permite ejecutar el algoritmo directamente desde la consola para inspección.
     datos = cargar_datos()
 
     resultado = ejecutar_algoritmo(

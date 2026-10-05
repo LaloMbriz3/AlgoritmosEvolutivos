@@ -1,8 +1,11 @@
+<!-- El doctype activa el modo estándar de interpretación HTML del navegador. -->
 <!DOCTYPE html>
+<!-- lang declara el idioma principal del documento para accesibilidad y herramientas. -->
 <html lang="es">
 
 <head>
 
+    <!-- Metadatos básicos y hoja de estilos servida por Flask. -->
     <meta charset="UTF-8">
 
     <meta
@@ -12,6 +15,7 @@
 
     <title>Generador de Horarios</title>
 
+    <!-- url_for es una función Jinja/Flask que genera la ruta correcta al recurso estático. -->
     <link
         rel="stylesheet"
         href="{{ url_for('static', filename='css/estilos.css') }}"
@@ -22,6 +26,7 @@
 
 <body>
 
+    <!-- Encabezado descriptivo de la aplicación. -->
     <header>
 
         <div class="header-contenido">
@@ -41,7 +46,7 @@
     <main>
 
 
-        <!-- CONTROLES -->
+        <!-- Controles para filtrar el horario y pedir una nueva solución al servidor. -->
 
         <section class="controles">
 
@@ -57,9 +62,11 @@
                         Todos los grupos
                     </option>
 
+                    <!-- Jinja ejecuta este bucle en el servidor antes de enviar el HTML. -->
                     {% for grupo in grupos %}
 
                     <option value="{{ grupo.id }}">
+                        <!-- {{ ... }} inserta en el HTML el valor calculado por Jinja. -->
                         {{ grupo.nombre }}
                     </option>
 
@@ -89,7 +96,7 @@
         </p>
 
 
-        <!-- RESUMEN -->
+        <!-- Indicadores que Flask inicializa y JavaScript actualiza al regenerar. -->
 
         <section class="resumen">
 
@@ -99,6 +106,7 @@
                     class="card-numero"
                     id="sesiones"
                 >
+                    <!-- Las expresiones Jinja imprimen los indicadores calculados por Flask. -->
                     {{ sesiones }}
                 </span>
 
@@ -112,6 +120,7 @@
             <div class="card">
 
                 <span class="card-numero">
+                    <!-- El filtro |length aplica la función de longitud a la lista de grupos. -->
                     {{ grupos|length }}
                 </span>
 
@@ -140,7 +149,7 @@
         </section>
 
 
-        <!-- EXPLICACIÓN -->
+        <!-- Contexto del problema que resuelve el generador. -->
 
         <section class="introduccion">
 
@@ -155,13 +164,13 @@
         </section>
 
 
-        <!-- AQUÍ JAVASCRIPT GENERARÁ LOS HORARIOS -->
+        <!-- JavaScript inserta aquí las tablas agrupadas por grupo. -->
 
         <section id="contenedorHorarios">
         </section>
 
 
-        <!-- INFORMACIÓN -->
+        <!-- Resumen visual de las etapas principales del proceso. -->
 
         <section class="informacion">
 
@@ -242,6 +251,8 @@
     </footer>
 
 
+    <!-- La lógica de interacción se carga después de que existe el contenido HTML. -->
+    <!-- url_for también resuelve el JavaScript desde la carpeta static del proyecto. -->
     <script
         src="{{ url_for('static', filename='js/app.js') }}"
     ></script>

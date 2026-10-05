@@ -1,3 +1,4 @@
+// const declara referencias que no se reasignan; el DOM se busca por su id HTML.
 const botonGenerar = document.getElementById("generarHorario");
 const selectorGrupo = document.getElementById("selectorGrupo");
 const contenedorHorarios = document.getElementById("contenedorHorarios");
@@ -6,6 +7,7 @@ const penalizacionElemento = document.getElementById("penalizacion");
 const mensaje = document.getElementById("mensaje");
 
 
+// Actualiza el texto de estado que se muestra debajo de los controles.
 function mostrarMensaje(texto) {
 
     mensaje.textContent = texto;
@@ -13,12 +15,15 @@ function mostrarMensaje(texto) {
 }
 
 
+// Construye una tarjeta interactiva con el detalle de una sesión programada.
 function crearClase(clase) {
 
+    // createElement crea nodos HTML y las propiedades siguientes definen su contenido.
     const elemento = document.createElement("div");
 
     elemento.className = "clase";
 
+    // Las comillas invertidas crean una plantilla multilínea; ${...} inserta valores.
     elemento.innerHTML = `
         <div class="materia">
             ${clase.materia}
@@ -38,9 +43,11 @@ function crearClase(clase) {
     `;
 
 
+    // addEventListener asocia una función que se ejecuta cuando ocurre el evento.
     elemento.addEventListener("click", function () {
 
         alert(
+            // Las plantillas interpoladas y + concatenan el texto mostrado en la alerta.
             `Materia: ${clase.materia}\n` +
             `Profesor: ${clase.profesor}\n` +
             `Salón: ${clase.salon}\n` +
@@ -56,13 +63,16 @@ function crearClase(clase) {
 }
 
 
+// Agrupa las sesiones por grupo y construye una tabla de días y horas para cada uno.
 function mostrarHorario(clases) {
 
     contenedorHorarios.innerHTML = "";
 
 
+    // La estructura por grupo permite renderizar cada horario de forma independiente.
     const grupos = {};
 
+    // forEach ejecuta una función flecha por cada elemento de la lista.
     clases.forEach(clase => {
 
         if (!grupos[clase.grupo_id]) {
@@ -79,13 +89,16 @@ function mostrarHorario(clases) {
     });
 
 
+    // Object.entries convierte propiedades del objeto en pares [clave, valor].
     Object.entries(grupos).forEach(
         ([grupoId, grupo]) => {
 
+            // La destructuración asigna los dos valores del par a variables con nombre.
             const seccion = document.createElement("section");
 
             seccion.className = "grupo";
 
+            // dataset escribe el atributo data-grupo, que luego usa el filtro.
             seccion.dataset.grupo = grupoId;
 
 
@@ -103,6 +116,7 @@ function mostrarHorario(clases) {
             tabla.className = "horario-tabla";
 
 
+            // La tabla estática se inserta como HTML; luego se completa el tbody con nodos.
             tabla.innerHTML = `
                 <thead>
                     <tr>
@@ -123,6 +137,7 @@ function mostrarHorario(clases) {
                 tabla.querySelector("tbody");
 
 
+            // Debe corresponder a las horas de inicio disponibles en los bloques JSON.
             const horas = [
                 "07:00",
                 "08:00",
@@ -160,6 +175,7 @@ function mostrarHorario(clases) {
                 fila.appendChild(horaCelda);
 
 
+                // El bucle anidado recorre los días para llenar cada fila horaria.
                 dias.forEach(dia => {
 
                     const celda =
@@ -169,6 +185,7 @@ function mostrarHorario(clases) {
                         "celda-clase";
 
 
+                    // find devuelve el primer elemento que satisface la condición, o undefined.
                     const claseEncontrada =
                         grupo.clases.find(clase =>
                             clase.dia === dia &&
@@ -208,6 +225,7 @@ function mostrarHorario(clases) {
 }
 
 
+// Oculta los grupos que no coinciden con la selección actual.
 function aplicarFiltro() {
 
     const grupoSeleccionado =
@@ -220,6 +238,7 @@ function aplicarFiltro() {
 
     grupos.forEach(grupo => {
 
+        // === compara sin conversión de tipos; || acepta cualquiera de las dos condiciones.
         if (
             grupoSeleccionado === "todos" ||
             grupo.dataset.grupo === grupoSeleccionado
@@ -238,6 +257,8 @@ function aplicarFiltro() {
 }
 
 
+// Solicita al servidor otra solución y actualiza la vista sin recargar la página.
+// async permite usar await y hace que la función retorne una Promise.
 async function generarHorario() {
 
     botonGenerar.disabled = true;
@@ -252,6 +273,8 @@ async function generarHorario() {
 
     try {
 
+        // Comprueba el estado HTTP antes de interpretar la respuesta como JSON.
+        // await pausa esta función hasta recibir la respuesta HTTP del servidor.
         const respuesta =
             await fetch("/generar");
 
@@ -265,6 +288,7 @@ async function generarHorario() {
         }
 
 
+        // json() también es asíncrono: interpreta el cuerpo de la respuesta como objeto JS.
         const resultado =
             await respuesta.json();
 
@@ -287,6 +311,7 @@ async function generarHorario() {
         );
 
 
+    // catch maneja errores de red o del procesamiento; finally siempre restaura el botón.
     } catch (error) {
 
         mostrarMensaje(
@@ -307,6 +332,7 @@ async function generarHorario() {
 }
 
 
+// Estos listeners conectan los eventos del selector y el botón con sus manejadores.
 selectorGrupo.addEventListener(
     "change",
     aplicarFiltro
