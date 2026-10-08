@@ -11,6 +11,7 @@ DATA_DIR = Path(__file__).parent.parent / "data"
 
 
 def cargar_json(nombre_archivo):
+    """Lee un archivo JSON desde el directorio de datos y devuelve su contenido."""
     # Abre cada archivo como UTF-8 para conservar correctamente los textos en español.
     # El operador / de Path une el directorio de datos con el nombre del archivo.
     ruta = DATA_DIR / nombre_archivo
@@ -22,6 +23,7 @@ def cargar_json(nombre_archivo):
 
 
 def cargar_datos():
+    """Carga y agrupa las colecciones JSON que requiere el generador de horarios."""
     # Centraliza las entidades y catálogos que usan el generador y la evaluación.
     materias = cargar_json("materias.json")
     profesores = cargar_json("profesores.json")

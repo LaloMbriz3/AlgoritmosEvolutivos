@@ -1,4 +1,14 @@
 def evaluar_horario(solucion, sesiones, datos):
+    """Calcula penalizaciones por conflictos y preferencias del horario.
+
+    Args:
+        solucion: Opción asignada a cada sesión.
+        sesiones: Sesiones académicas asociadas a las opciones.
+        datos: Catálogos, incluyendo los bloques horarios.
+
+    Returns:
+        La penalización total; los valores menores representan mejores horarios.
+    """
     # Una penalización menor representa un horario preferible para el algoritmo.
     penalizacion = 0
 

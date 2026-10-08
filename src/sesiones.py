@@ -1,4 +1,13 @@
 def crear_sesiones(asignaciones, materias):
+    """Divide las horas semanales asignadas en sesiones programables.
+
+    Args:
+        asignaciones: Relaciones entre materias, grupos y profesores.
+        materias: Definiciones de materias con carga semanal y duración preferida.
+
+    Returns:
+        Una lista de sesiones con IDs, relaciones y duración.
+    """
     # Convierte horas semanales por asignación en unidades que el algoritmo puede ubicar.
     sesiones = []
 

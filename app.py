@@ -11,6 +11,7 @@ app = Flask(__name__)
 
 
 def generar_horario():
+    """Genera una solución evolutiva y prepara sus datos para la interfaz web."""
 
     # Cada petición vuelve a leer los datos y ejecuta una nueva búsqueda evolutiva.
     datos = cargar_datos()
@@ -134,6 +135,7 @@ def generar_horario():
 # El decorador registra la función como manejador de una ruta HTTP.
 @app.route("/")
 def inicio():
+    """Renderiza la página inicial con un horario y sus estadísticas."""
 
     # La página inicial presenta el primer horario junto con sus estadísticas.
     resultado = generar_horario()
@@ -151,6 +153,7 @@ def inicio():
 # Esta ruta devuelve datos para que JavaScript actualice la página sin recargarla.
 @app.route("/generar")
 def generar():
+    """Genera otro horario y lo devuelve como respuesta JSON."""
 
     # El navegador consume este endpoint para solicitar un horario nuevo sin recargar.
     resultado = generar_horario()
