@@ -11,6 +11,18 @@ from src.evaluacion import evaluar_horario
 
 
 def preparar_opciones(sesiones, datos):
+    """Calcula las alternativas válidas para cada sesión.
+
+    Args:
+        sesiones: Sesiones que deben programarse.
+        datos: Catálogos de grupos, profesores, salones y bloques horarios.
+
+    Returns:
+        Una lista de opciones por sesión.
+
+    Raises:
+        ValueError: Si alguna sesión no tiene opciones válidas.
+    """
     # Cada gen necesita al menos una alternativa válida para cada sesión.
     opciones_por_sesion = []
 
@@ -29,6 +41,7 @@ def preparar_opciones(sesiones, datos):
 
 
 def crear_individuo(opciones_por_sesion):
+    """Crea un cromosoma eligiendo una opción al azar para cada sesión."""
     # El cromosoma guarda un índice: uno por sesión, apuntando a su alternativa.
     # La comprensión de lista produce un gen por sesión y randrange elige un índice válido.
     return [
@@ -38,6 +51,7 @@ def crear_individuo(opciones_por_sesion):
 
 
 def convertir_solucion(individuo, opciones_por_sesion):
+    """Convierte los índices de un cromosoma en opciones de horario completas."""
     # Traduce los índices del cromosoma a bloques horarios y salones concretos.
     # enumerate entrega a la vez la posición y el gen; esa posición identifica la sesión.
     return [
@@ -51,6 +65,16 @@ def ejecutar_algoritmo(
     tam_poblacion=50,
     generaciones=100
 ):
+    """Busca una asignación de horarios con penalización baja usando DEAP.
+
+    Args:
+        datos: Datos cargados de materias, grupos, profesores, espacios y bloques.
+        tam_poblacion: Cantidad de individuos que forman cada población.
+        generaciones: Número de iteraciones evolutivas que se ejecutan.
+
+    Returns:
+        Un diccionario con las sesiones, la mejor solución y su penalización.
+    """
     # Primero se convierte la carga semanal de cada asignación en sesiones atómicas.
     sesiones = crear_sesiones(
         datos["asignaciones"],
@@ -99,6 +123,7 @@ def ejecutar_algoritmo(
     )
 
     def evaluar(individuo):
+        """Calcula la penalización del horario representado por un individuo."""
         # DEAP espera una tupla de aptitud; el peso negativo indica que se minimiza.
         solucion = convertir_solucion(
             individuo,
@@ -238,6 +263,7 @@ def ejecutar_algoritmo(
 
 
 def imprimir_horario(resultado, datos):
+    """Imprime en consola la solución ordenada y un resumen de su penalización."""
 
     # Prepara índices para resolver las referencias de la solución al imprimirla.
     # Estas comprensiones de diccionario convierten catálogos en índices de consulta directa.

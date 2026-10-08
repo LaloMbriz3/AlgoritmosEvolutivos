@@ -1,8 +1,13 @@
 class Clase:
-    """Representa una clase asignada a un bloque horario y un salón."""
+    """Representa una clase asignada a un bloque horario y un salón.
+
+    Los identificadores vinculan la clase con su asignación, materia, grupo,
+    profesor, bloque de horario y salón.
+    """
 
     # __init__ es el inicializador llamado al crear una instancia de Clase.
     def __init__(self, asignacion, bloque_id, salon_id):
+        """Inicializa la clase usando una asignación y los IDs de bloque y salón."""
         # Conserva las relaciones mediante identificadores, no copias completas
         # de las entidades de los archivos JSON.
         # self identifica el objeto actual; sus atributos quedan disponibles en la instancia.
@@ -15,6 +20,7 @@ class Clase:
 
     # Python usa __repr__ para obtener una representación textual de depuración.
     def __repr__(self):
+        """Devuelve una representación textual de los identificadores de la clase."""
         # Devuelve una representación compacta útil durante la depuración.
         return (
             # Las f-strings interpolan atributos; los literales adyacentes se concatenan.

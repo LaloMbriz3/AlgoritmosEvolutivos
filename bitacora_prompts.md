@@ -1,13 +1,29 @@
-# Bitácora de Prompts - Bloque 1
+# Bitácora de prompts utilizados durante el desarrollo del prototipo funcional
 
-**Interacción 1: Búsqueda del problema realista**
-* **Prompt:** "Nuestra rama es algoritmos evolutivos. Sugiere un problema real, complejo y logístico para nuestro Bloque 1 que justifique el uso de esta IA."
-* **Corrección/Acción:** Elegimos el problema de asignación de horarios (Timetabling) y descartamos la optimización de rutas geográficas por falta de viabilidad para un sprint corto.
+| Etapa | Prompt / solicitud realizada a la IA | Objetivo | Resultado obtenido |
+|---|---|---|---|
+| 1. Definición del problema | Explicar cómo plantear un proyecto de generación automática de horarios escolares utilizando Inteligencia Artificial. | Definir el problema y orientar la solución. | Se estableció como problema la generación manual de horarios y sus posibles conflictos entre grupos, profesores, salones y horarios. |
+| 2. Selección de la técnica de IA | Analizar qué rama o técnica de IA sería adecuada para generar automáticamente horarios escolares y explicar por qué utilizar algoritmos evolutivos. | Seleccionar el enfoque de IA del proyecto. | Se eligieron **algoritmos evolutivos**, debido a que permiten explorar diferentes combinaciones de horarios y optimizarlas mediante una función de evaluación. |
+| 3. Diseño de los datos | Proponer qué datos son necesarios para generar un horario escolar automáticamente. | Definir la estructura de entrada del sistema. | Se identificaron materias, profesores, grupos, salones, bloques horarios y asignaciones. |
+| 4. Creación de datos de prueba | Definir datos sintéticos para materias, profesores, grupos, salones y asignaciones que permitan probar el algoritmo. | Crear un conjunto de datos reproducible para el prototipo. | Se crearon archivos JSON para almacenar los datos de prueba. |
+| 5. Definición de restricciones | Determinar las restricciones que debe considerar el generador de horarios. | Evitar horarios inválidos. | Se definieron restricciones como evitar que un profesor, grupo o salón tenga dos clases al mismo tiempo, además de considerar disponibilidad, capacidad de los salones y horario permitido de los grupos. |
+| 6. Distribución de horas | Explicar cómo convertir las horas semanales de una materia en sesiones que puedan ser acomodadas por el algoritmo. | Preparar las asignaciones para el algoritmo evolutivo. | Se implementó la división de horas en sesiones, por ejemplo, materias de 3 horas principales como 2+1 y otras materias como 1+1+1. |
+| 7. Generación de opciones | Diseñar la lógica para obtener opciones válidas de día, bloque y salón para cada sesión. | Reducir las combinaciones inválidas antes de ejecutar el algoritmo. | Se desarrolló la generación de opciones de horario considerando disponibilidad del profesor, horario del grupo y capacidad del salón. |
+| 8. Función de evaluación | Diseñar una función de penalización para medir qué tan buena es una propuesta de horario. | Permitir que el algoritmo diferencie soluciones buenas y malas. | Se establecieron penalizaciones altas para conflictos de grupo, profesor y salón, y penalizaciones menores para huecos y sobrecarga diaria. |
+| 9. Implementación del algoritmo | Implementar en Python un algoritmo evolutivo utilizando DEAP para encontrar una buena combinación de sesiones y opciones de horario. | Construir el núcleo de Inteligencia Artificial del prototipo. | Se implementó una población de soluciones con selección, cruzamiento, mutación y evaluación durante varias generaciones. |
+| 10. Pruebas del algoritmo | Ejecutar el algoritmo y revisar si genera un horario completo sin errores. | Comprobar el funcionamiento del algoritmo. | El algoritmo generó **31 sesiones** y obtuvo diferentes penalizaciones dependiendo de la ejecución, debido al carácter estocástico del algoritmo evolutivo. |
+| 11. Desarrollo de la interfaz web | Convertir el generador de horarios en una aplicación web local utilizando Flask, HTML, CSS y JavaScript. | Facilitar la interacción con el prototipo. | Se creó una interfaz donde el usuario puede generar y consultar los horarios por grupo. |
+| 12. Integración | Conectar el algoritmo de Python con la aplicación web mediante Flask. | Integrar la lógica de IA con la interfaz. | La ruta `/generar` ejecuta el algoritmo y devuelve el horario generado para mostrarlo en la página. |
+| 13. Ajuste de datos | Actualizar los datos para que los grupos trabajen de 07:00 a 14:00 y ampliar la disponibilidad de los profesores. | Adaptar el prototipo a los nuevos requerimientos del equipo. | Se modificaron `data/grupos.json` y `data/profesores.json` y se comprobó nuevamente el funcionamiento del algoritmo. |
+| 14. Validación final del cambio | Ejecutar nuevamente el algoritmo después de modificar los datos y verificar el resultado. | Confirmar que los cambios no rompieran el prototipo. | Se obtuvieron **31 sesiones** y una **penalización final de 5**, confirmando que el algoritmo continuaba funcionando. |
+| 15. Control de versiones | Solicitar orientación para guardar y subir los cambios mediante Git y GitHub. | Mantener evidencia del trabajo realizado y compartir los cambios con el equipo. | Se creó el commit `fb9883d` y se subieron los cambios a la rama `feature/paola-horarios`. |
 
-**Interacción 2: Estructura de datos**
-* **Prompt:** "¿Cuáles serían los datos de entrada exactos para un algoritmo evolutivo que asigne horarios escolares?"
-* **Corrección/Acción:** La IA sugirió diccionarios en el código, pero el equipo lo corrigió creando archivos JSON independientes (materias, profesores, grupos, salones) para mejorar la escalabilidad.
+## Reflexión sobre el uso de IA
 
-**Interacción 3: Densidad de Horarios (Huecos)**
-* **Prompt:** "El algoritmo web genera horarios válidos pero con muchos huecos. ¿Cómo solucionamos las horas libres?"
-* **Corrección/Acción:** Se identificó que las restricciones duras funcionaban, pero las suaves no. Aumentamos la carga horaria semanal en materias.json para saturar el turno matutino.
+Durante el desarrollo del prototipo, la IA se utilizó como herramienta de apoyo para analizar el problema, proponer estructuras de datos, orientar la implementación del algoritmo evolutivo, revisar errores y explicar el funcionamiento del código.
+
+El equipo fue responsable de tomar las decisiones sobre el problema, las restricciones, los datos, la estructura del proyecto y la integración final. Las propuestas generadas por la IA fueron revisadas, modificadas y probadas antes de incorporarse al proyecto.
+
+La IA también fue utilizada para comprender y documentar el funcionamiento de los componentes del sistema, especialmente la relación entre los datos de entrada, la generación de sesiones, las opciones válidas, la función de penalización y el algoritmo evolutivo.
+
+**Nota:** Los prompts registrados en esta bitácora representan las solicitudes utilizadas durante el proceso de desarrollo y se presentan de forma resumida para documentar el uso de IA durante la construcción del prototipo.
