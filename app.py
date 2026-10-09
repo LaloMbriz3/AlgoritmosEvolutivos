@@ -1,3 +1,6 @@
+# os permite leer variables de entorno, como el puerto asignado por Render.
+import os
+
 # Flask aporta la aplicación web y las funciones que generan respuestas HTML y JSON.
 from flask import Flask, render_template, jsonify
 
@@ -164,7 +167,9 @@ def generar():
 
 # Esta condición evita iniciar el servidor cuando app.py se importa desde otro módulo.
 if __name__ == "__main__":
-
-    app.run(
-        debug=True
-    )
+    # Render define PORT al iniciar el servicio; el valor alternativo facilita
+    # ejecutar la aplicación localmente con el puerto habitual de Flask.
+    port = int(os.environ.get("PORT", 5000))
+    # Escuchar en todas las interfaces permite que Render enrute tráfico web
+    # hacia el proceso; el puerto coincide con PORT o con el valor alternativo.
+    app.run(host="0.0.0.0", port=port)
